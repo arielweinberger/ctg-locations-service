@@ -1,0 +1,17 @@
+// localhost -> 127.0.0.1
+// google.com -> 8.8.8.8
+
+// 1. Define endpoints
+// Accept HTTP requests, return HTTP resposnses
+// 2. Start a web server
+
+// query: localhost:3000?page=10
+// path: localhost:3000/user/ariel
+// body: localhost:3000
+
+// localhost:3000/auth/signin
+// localhost:3000/auth/signout
+// localhost:3000/auth/signup
+
+// location:3000/locations
+// location:3000/location/:id
