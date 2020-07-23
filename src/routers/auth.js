@@ -46,6 +46,12 @@ authRouter.post('/signin', async (req, res) => {
   }
 
   console.log(`Successful sign in as "${username}"`);
+  res.cookie('userId', user.id, { httpOnly: true });
+  return res.status(200).send();
+});
+
+authRouter.post('/signout', async (req, res) => {
+  res.clearCookie('userId'); 
   return res.status(200).send();
 });
 
