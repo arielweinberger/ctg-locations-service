@@ -39,9 +39,13 @@ authRouter.post('/signin', async (req, res) => {
 
   const user = await User.findOne({ username });
 
+  if (!user) {
+    return res.status(401).send();
+  }
+
   const isPasswordValid = await bcrypt.compare(password, user.password);
 
-  if (!user || !isPasswordValid) {
+  if (!isPasswordValid) {
     return res.status(401).send();
   }
 

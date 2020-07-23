@@ -4,7 +4,9 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 
+const authMiddleware = require('./middleware/authMiddleware');
 const authRouter = require('./routers/auth');
+const locationsRouter = require('./routers/locations');
 
 const app = express();
 
@@ -13,6 +15,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/auth', authRouter);
+
+app.use('/locations', authMiddleware);
+app.use('/locations', locationsRouter);
 
 async function initialize() {
   // 1. Connect to the database
