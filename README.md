@@ -33,3 +33,4 @@ nodemon src/index.js
 ```
 
 ## Enjoy!
+The service should be available at `http://localhots:3000`

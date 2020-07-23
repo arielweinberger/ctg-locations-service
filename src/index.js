@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -13,7 +14,7 @@ app.use('/auth', authRouter);
 
 async function initialize() {
   // 1. Connect to the database
-  await mongoose.connect('mongodb+srv://admin:<your-password-here>@cluster0.3i1f5.mongodb.net/ctg-internship?retryWrites=true&w=majority', {
+  await mongoose.connect(`mongodb+srv://admin:${process.env.MONGODB_PASSWORD}@cluster0.3i1f5.mongodb.net/ctg-internship?retryWrites=true&w=majority`, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
