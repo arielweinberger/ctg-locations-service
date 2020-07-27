@@ -36,6 +36,14 @@ locationsRouter.get('/', async (req, res) => {
     ]);
   }
 
+  // Add "canDelete" property to help front-end understand
+  // whether the user is permitted to delete a task or not.
+  // This does not expose the userId to the user.
+  locations = locations.map(location => ({
+    ...location._doc,
+    canDelete: location._doc.owner === userId,
+  }));
+
   return res.status(200).json(locations);
 });
 
