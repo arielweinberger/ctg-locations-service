@@ -3,6 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 const authMiddleware = require('./middleware/authMiddleware');
 const authRouter = require('./routers/auth');
@@ -10,6 +11,7 @@ const locationsRouter = require('./routers/locations');
 
 const app = express();
 
+app.use(cors());
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
