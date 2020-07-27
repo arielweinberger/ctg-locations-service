@@ -23,7 +23,7 @@ locationsRouter.post('/', async (req, res) => {
 
 locationsRouter.get('/', async (req, res) => {
   const { userId } = req;
-  const showPublic = Boolean(req.query.public);
+  const showPublic = req.query.public === 'true';
 
   let locations;
 
