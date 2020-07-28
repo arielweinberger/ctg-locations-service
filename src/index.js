@@ -16,7 +16,7 @@ console.log('2');
 
 const app = express();
 
-app.use(cors({ credentials: true, origin: ['https://still-scrubland-63924.herokuapp.com/', 'http://localhodt:3001'] }));
+app.use(cors({ credentials: true, origin: 'https://still-scrubland-63924.herokuapp.com' }));
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
