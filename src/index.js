@@ -32,7 +32,8 @@ async function initialize() {
   );
 
   // 2. Serve API
-  app.listen(3000, (error) => {
+  const port = process.env.PORT || 3000;
+  app.listen(port, (error) => {
     if (error) {
       return console.error(error);
     }
