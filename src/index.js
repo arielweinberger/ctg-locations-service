@@ -49,7 +49,7 @@ console.log('mdb1');
       return console.error(error);
     }
 
-    console.log(`Listetning to new connections on port ${PORT}`);
+    console.log(`Listetning to new connections on port ${port}`);
   });
 }
 
