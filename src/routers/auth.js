@@ -7,7 +7,6 @@ const authRouter = express.Router();
 
 authRouter.post('/signup', async (req, res) => {
   const { username, password } = req.body;
-  console.log(`Attempt to sign up as "${username}"`);
 
   // Check if username already exists.
   // If it exists, send a 409 (Conflict) status code.
@@ -29,27 +28,24 @@ authRouter.post('/signup', async (req, res) => {
   user.password = hashedPassword;
   await user.save();
 
-  console.log(`User "${username}" signed up successfully`);
   return res.status(201).send();
 });
 
 authRouter.post('/signin', async (req, res) => {
   const { username, password } = req.body;
-  console.log(`Attempt to sign in as "${username}"`);
 
   const user = await User.findOne({ username });
 
   if (!user) {
-    return res.status(401).send();
+    return res.status(401).send({ message: 'Invalid username and/or password' });
   }
 
   const isPasswordValid = await bcrypt.compare(password, user.password);
 
   if (!isPasswordValid) {
-    return res.status(401).send();
+    return res.status(401).send({ message: 'Invalid username and/or password' });
   }
 
-  console.log(`Successful sign in as "${username}"`);
   res.cookie('userId', user.id, { httpOnly: true });
   return res.status(200).send();
 });
@@ -57,6 +53,14 @@ authRouter.post('/signin', async (req, res) => {
 authRouter.post('/signout', async (req, res) => {
   res.clearCookie('userId'); 
   return res.status(200).send();
+});
+
+authRouter.get('/me', async (req, res) => {
+  if (req.cookies.userId) {
+    return res.status(200).send();
+  } else {
+    return res.status(401).send();
+  }
 });
 
 module.exports = authRouter;
